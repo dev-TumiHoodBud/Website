@@ -146,50 +146,50 @@
                 <div class="motion-label">Technical Skills</div>
                 
                 <div class="skills-wrapper">
-                  <div class="skill photoshop">
-            <div class="skill-name">HTML5, CSS3 & JavaScript</div>
+                  <div class="skill photoshop" data-level="92">
+            <div class="skill-name">Front-End Development: HTML5, CSS3 & JavaScript</div>
             <div class="progress-bar">
                 <div class="progress-fill"></div>
             </div>
         </div>
 
-        <div class="skill html">
-            <div class="skill-name">React.js, Node.js, Express</div>
+        <div class="skill html" data-level="86">
+            <div class="skill-name">React.js & Interactive User Interfaces</div>
             <div class="progress-bar">
                 <div class="progress-fill"></div>
             </div>
         </div>
 
-        <div class="skill css">
-            <div class="skill-name">Git & GitHub</div>
+        <div class="skill css" data-level="84">
+            <div class="skill-name">Git, GitHub & Version Control</div>
             <div class="progress-bar">
                 <div class="progress-fill"></div>
             </div>
         </div>
 
-        <div class="skill sql">
-            <div class="skill-name">SQL / Database Design (PostgreSQL & MS SQL)</div>
+        <div class="skill sql" data-level="80">
+            <div class="skill-name">SQL Database Design: PostgreSQL & MS SQL</div>
             <div class="progress-bar">
                 <div class="progress-fill"></div>
             </div>
         </div>
 
-        <div class="skill java">
-            <div class="skill-name">React.js, Node.js, Express</div>
+        <div class="skill java" data-level="78">
+            <div class="skill-name">Back-End Development: Node.js & Express</div>
             <div class="progress-bar">
                 <div class="progress-fill"></div>
             </div>
         </div>
 
-        <div class="skill python">
-            <div class="skill-name">Python</div>
+        <div class="skill python" data-level="76">
+            <div class="skill-name">Python & Java Programming</div>
             <div class="progress-bar">
                 <div class="progress-fill"></div>
             </div>
                   </div>
             
-                  <div class="skill vscode">
-                    <div class="skill-name">Java</div>
+                  <div class="skill vscode" data-level="88">
+                    <div class="skill-name">UI/UX Design, Wireframing & Responsive Layouts</div>
                     <div class="progress-bar">
                       <div class="progress-fill"></div>
                     </div>
@@ -201,18 +201,36 @@
               </div>
             
              <script>
-    // Animate the progress bars when the section becomes visible
     window.addEventListener('load', function() {
-        const progressBars = document.querySelectorAll('.progress-fill');
-        
-        // You can set different widths here (or use data attributes)
-        const levels = [90, 80, 75, 85, 65, 70]; // HTML/CSS/JS, Node, React, SQL, Java, Python
-        
-        progressBars.forEach((bar, index) => {
-            setTimeout(() => {
-                bar.style.width = levels[index] + '%';
-            }, 300 + (index * 150)); // slight delay for nice cascade effect
-        });
+        const skillsSection = document.querySelector('.progress-container');
+        const skills = document.querySelectorAll('.skill[data-level]');
+
+        function animateSkillBars() {
+            skills.forEach((skill, index) => {
+                const fill = skill.querySelector('.progress-fill');
+                const level = skill.getAttribute('data-level');
+
+                setTimeout(() => {
+                    fill.style.width = level + '%';
+                    skill.classList.add('is-filled');
+                }, index * 160);
+            });
+        }
+
+        if ('IntersectionObserver' in window && skillsSection) {
+            const observer = new IntersectionObserver((entries, observerInstance) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        animateSkillBars();
+                        observerInstance.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.35 });
+
+            observer.observe(skillsSection);
+        } else {
+            animateSkillBars();
+        }
     });
 </script>
 
@@ -229,48 +247,55 @@
             <div class="row about-experience__timeline">
 
                 <div class="column large-half tab-full" data-aos="fade-up">
-                    <div class="timeline">
+                    <div class="featured-projects">
+                        <p class="featured-projects__eyebrow">Featured Work</p>
+                        <h3 class="featured-projects__title">Projects Built With Design and Code</h3>
 
-                        <div class="timeline__icon-wrap">
-                            <span class="timeline__icon timeline__icon--work"></span>
-                        </div>
+                        <article class="project-card project-card--highlight">
+                            <div class="project-card__top">
+                                <span class="project-card__type">Full-Stack Web App</span>
+                                <span class="project-card__year">2023</span>
+                            </div>
+                            <h4>Eduvos Tech Online Store</h4>
+                            <p>Designed and developed an e-commerce experience for browsing products, managing cart activity, handling admin inventory updates, and storing purchase records with a SQL-backed data layer.</p>
+                            <div class="project-card__tags">
+                                <span>HTML</span>
+                                <span>CSS</span>
+                                <span>JavaScript</span>
+                                <span>SQL</span>
+                            </div>
+                            <a class="project-card__link" href="https://ecom-mographics.vercel.app/" target="_blank" rel="noopener noreferrer">View live project</a>
+                        </article>
 
-                        <div class="timeline__block">
-                            <div class="timeline__bullet"></div>
-                            <div class="timeline__header">
-                                <p class="timeline__timeframe">July 2018 - Present</p>
-                                <h3 class="item-title">Graphic Design & Photoshop</h3>
-                                <h5>Branding</h5>
+                        <article class="project-card">
+                            <div class="project-card__top">
+                                <span class="project-card__type">Portfolio Website</span>
+                                <span class="project-card__year">2023</span>
                             </div>
-                            <div class="timeline__desc">
-                                <p>I am a graphic designer with expertise in creating compelling visual content using Adobe Photoshop. My work spans across branding, photo editing, and logo design, where I combine creativity with technical proficiency to deliver polished and impactful designs that resonate with clients' brand identities</p>
+                            <h4>MoGraphics Web Portfolio</h4>
+                            <p>Built a responsive portfolio website to present visual design work through an interactive, branded web experience that combines front-end development with creative direction.</p>
+                            <div class="project-card__tags">
+                                <span>Responsive Design</span>
+                                <span>UI Design</span>
+                                <span>JavaScript</span>
                             </div>
-                        </div>
+                            <a class="project-card__link" href="https://mographics.vercel.app/" target="_blank" rel="noopener noreferrer">View live project</a>
+                        </article>
 
-                        <div class="timeline__block">
-                            <div class="timeline__bullet"></div>
-                            <div class="timeline__header">
-                                <p class="timeline__timeframe">Aug 2023 </p>
-                                <h3 class="item-title">Eduvos - Tech Online store</h3>
-                                <h5>Frontend & backend development </h5>
+                        <article class="project-card">
+                            <div class="project-card__top">
+                                <span class="project-card__type">Visual Design</span>
+                                <span class="project-card__year">2018 - Present</span>
                             </div>
-                            <div class="timeline__desc">
-                                <p>I developed a distributed e-commerce website for the sales of computers and accessories. The web-based interface allows users to browse products, add items to their shopping cart, and complete purchases. An administrator panel provides tools for inventory management, adding new items, and viewing purchase records. The website is supported by SQL databases for efficient data management.</p>
+                            <h4>Branding and Photoshop Design</h4>
+                            <p>Create polished brand visuals, image edits, and logo concepts using a design process focused on clarity, visual consistency, and strong presentation for clients and digital platforms.</p>
+                            <div class="project-card__tags">
+                                <span>Photoshop</span>
+                                <span>Branding</span>
+                                <span>Photo Editing</span>
                             </div>
-                        </div>
-
-                        <div class="timeline__block">
-                            <div class="timeline__bullet"></div>
-                            <div class="timeline__header">
-                                <p class="timeline__timeframe">April 2023 </p>
-                                <h3 class="item-title">MoGraphics Web</h3>
-                                <h5>Frontend Developer and Web design</h5>
-                            </div>
-                            <div class="timeline__desc">
-                                <p>I created my first portfolio website to showcase my graphic design artwork. Built using HTML, CSS, and JavaScript, the site highlights my design projects and provides an interactive user experience, reflecting both my creativity and technical skills. </p>
-                            </div>
-                        </div>
-
+                            <a class="project-card__link" href="#works">View gallery</a>
+                        </article>
                     </div>
                 </div>
 
@@ -425,67 +450,54 @@
             <div class="column large-full">
                 <h2 class="section-heading section-heading--centerbottom">PROJECTS</h2>
                 <p class="section-desc">
-                    Here are some of my selected works I have done lately. Feel free to 
-                    check them out.
+                    Selected websites and digital projects that combine clean visual design,
+                    responsive layouts, and practical front-end development.
                 </p>
             </div>
         </div> <!-- end heading-block -->
 
-        <div class="masonry-wrap">
-
-            <div class="masonry">
-                <div class="grid-sizer"></div>
-    
-                <div class="masonry__brick" data-aos="fade-up">
-                    <div class="item-folio">
-                        <div class="item-folio__thumb">
-                            <a href="image.png" class="thumb-link" title="Brand" data-size="1050x700">
-                                <img src="image.png" 
-                                     srcset="" alt="">
-                            </a>    
-                            <a href="https://ecom-mographics.vercel.app/ "class="item-folio__project-link" title="Project link" target="_blank"></a>
-                        </div>
-    
-                        <div class="item-folio__text">
-                            <h4 class="item-folio__title">
-    <a href="https://mographics.vercel.app//" target="_blank" rel="noopener noreferrer">MoGraphics Portfolio</a>
-</h4>
-
-                            <p class="item-folio__cat">
-                                Branding
-                            </p>
-                        </div>
-    
-                        <div class="item-folio__caption">
-                            <p>A personal portfolio showcasing my graphic art designs, utilizing Adobe Photoshop for design creation and
-                                Visual Studio Code for website development.</p>
-                        </div>
+        <div class="website-projects">
+            <article class="website-project" data-aos="fade-up">
+                <a class="website-project__image" href="https://mographics.vercel.app/" target="_blank" rel="noopener noreferrer">
+                    <img src="image.png" alt="MoGraphics portfolio website preview">
+                </a>
+                <div class="website-project__content">
+                    <div class="website-project__meta">
+                        <span>Portfolio Website</span>
+                        <span>Live</span>
                     </div>
-                </div> <!-- end masonry__brick -->
-    
-                <div class="masonry__brick" data-aos="fade-up">
-                    <div class="item-folio">
-                        <div class="item-folio__thumb">
-                            <a href="Cover.png" class="thumb-link" title="Web Gallery" data-size="1050x700">
-                                <img src="Cover.png" 
-                                     srcset="" alt="">
-                            </a>
-                            <a href="https://website-gall.vercel.app/" class="item-folio__project-link" title="Project link" target="_blank"></a>
-                        </div>
-                        <div class="item-folio__text">
-                          <h4 class="item-folio__title">
-    <a href="https://website-gall.vercel.app/" target="_blank" rel="noopener noreferrer"> Gallery</a>
-</h4>
-
-                            <p class="item-folio__cat">
-                                Web gallery 
-                            </p>
-                        </div>
-                        <div class="item-folio__caption">
-                            <p>Morden website design with smooth interactions and feel to it as you explore the arts and gallery of.</p>
-                        </div>
+                    <h3>MoGraphics Portfolio</h3>
+                    <p>A personal portfolio website created to showcase graphic design work, brand visuals, and digital artwork through a responsive web experience.</p>
+                    <div class="website-project__tags">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                        <span>Branding</span>
                     </div>
-                
+                    <a class="website-project__button" href="https://mographics.vercel.app/" target="_blank" rel="noopener noreferrer">View Website</a>
+                </div>
+            </article>
+
+            <article class="website-project website-project--dark" data-aos="fade-up">
+                <a class="website-project__image" href="https://website-gall.vercel.app/" target="_blank" rel="noopener noreferrer">
+                    <img src="Cover.png" alt="Web gallery project preview">
+                </a>
+                <div class="website-project__content">
+                    <div class="website-project__meta">
+                        <span>Interactive Gallery</span>
+                        <span>Live</span>
+                    </div>
+                    <h3>Web Gallery Experience</h3>
+                    <p>A modern gallery website with strong visual presentation, smooth interactions, and an immersive layout built for exploring digital artwork.</p>
+                    <div class="website-project__tags">
+                        <span>Web Design</span>
+                        <span>Gallery UI</span>
+                        <span>Responsive Layout</span>
+                    </div>
+                    <a class="website-project__button" href="https://website-gall.vercel.app/" target="_blank" rel="noopener noreferrer">View Website</a>
+                </div>
+            </article>
+        </div>
 
     </section> <!-- end s-work -->
 

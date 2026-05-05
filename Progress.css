@@ -1,25 +1,25 @@
 .progress-container {
     width: 100%;
-    max-width: 600px;
-    margin: 20px auto;
+    max-width: 760px;
+    margin: 40px auto;
     position: relative;
-    padding: 10px;
+    padding: 10px 20px;
     display: flex;
     align-items: center;
+    gap: 40px;
   }
 
   .motion-label {
     font-size: 36px;
     font-weight: bold;
     color: #333;
-    margin-right: 40px; /* Space between the label and progress bars */
-   
-    transform-origin: left center; /* Adjusts the origin for rotation */
-    white-space: nowrap; /* Prevents text from wrapping */
+    margin-right: 0;
+    transform-origin: left center;
+    white-space: nowrap;
   }
 
   .skills-wrapper {
-    flex: 1; /* Take up remaining space */
+    flex: 1;
   }
   .skill {
     margin: 20px 0;
@@ -34,10 +34,11 @@
   .progress-bar {
     position: relative;
     width: 100%;
-    height: 20px;
-    background-color: #e0e0e0;
+    height: 18px;
+    background-color: #e7e7e7;
     border-radius: 15px;
     overflow: hidden;
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.18);
   }
 
   .progress-fill {
@@ -45,30 +46,50 @@
     border-radius: 15px;
     background: linear-gradient(to right, #303030, #c72370);
     width: 0;
-    transition: width 2s ease;
+    transition: width 1.7s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 0 14px rgba(199, 35, 112, 0.45);
   }
 
-  /* Skill-specific widths */
-  .photoshop .progress-fill { width: 90%; } /* Example: Photoshop skill at 90% */
-  .html .progress-fill { width: 80%; }      /* Example: HTML skill at 80% */
-  .css .progress-fill { width: 75%; }       /* Example: CSS skill at 75% */
-  .sql .progress-fill { width: 70%; }       /* Example: SQL skill at 70% */
-  .java .progress-fill { width: 60%; }      /* Example: Java skill at 60% */
-  .python .progress-fill { width: 85%; }    /* Example: Python skill at 85% */
-  .figma .progress-fill { width: 45%; }    /* Example: VS Code skill at 95% */
-  .vscode .progress-fill { width: 85%; }    /* Example: VS Code skill at 95% */
+  .progress-fill::after {
+    content: "";
+    display: block;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    transform: translateX(-100%);
+  }
+
+  .skill.is-filled .progress-fill::after {
+    animation: progressShine 1.2s ease 0.35s 1;
+  }
+
+  @keyframes progressShine {
+    to {
+      transform: translateX(100%);
+    }
+  }
   
 
   @media (max-width: 600px) {
+    .progress-container {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .skills-wrapper {
+      width: 100%;
+    }
+
     .motion-label {
-      font-size: 20px; /* Further adjust font size for very small screens */
+      font-size: 20px;
     }
   
     .progress-bar {
-      height: 15px; /* Further adjust height for very small screens */
+      height: 15px;
     }
     
     .skill-name {
-      font-size: 14px; /* Adjust font size for very small screens */
+      font-size: 14px;
     }
   }
